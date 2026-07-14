@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Longhorn Concrete Inc. | Family-Owned Concrete Contractors, San Fernando Valley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wet-cement:#1E1A17;
+    --charcoal:#2A2521;
+    --charcoal-soft:#37312B;
+    --cured-stone:#EDE7DA;
+    --stone-soft:#F7F3EA;
+    --paper:#FBF8F2;
+    --aggregate:#8B8378;
+    --aggregate-dim:#6E675C;
+    --oxide:#A8432B;
+    --oxide-deep:#832F1D;
+    --brass:#C69A46;
+    --brass-soft:#E4C989;
+    --ink:#211D1A;
+    --line-on-dark: rgba(237,231,218,0.14);
+    --line-on-light: rgba(33,29,26,0.12);
+    --ease: cubic-bezier(0.16,1,0.3,1);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-optical-sizing:auto;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  section{position:relative;}
+  ::selection{background:var(--oxide);color:var(--paper);}
+
+  /* ---------- reveal on scroll ---------- */
+  [data-reveal]{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+  [data-reveal-delay="1"]{transition-delay:0.08s;}
+  [data-reveal-delay="2"]{transition-delay:0.16s;}
+  [data-reveal-delay="3"]{transition-delay:0.24s;}
+  [data-reveal-delay="4"]{transition-delay:0.32s;}
+  [data-reveal-delay="5"]{transition-delay:0.40s;}
+  [data-reveal-delay="6"]{transition-delay:0.48s;}
+
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{opacity:1 !important; transform:none !important; transition:none !important;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- texture ---------- */
+  .grain{
+    position:absolute;inset:0;
+    pointer-events:none;
+    opacity:0.5;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- poured seam divider ---------- */
+  .seam{
+    display:block;
+    width:100%;
+    height:44px;
+    margin-top:-1px;
+  }
+  .seam path{transition:fill 0.3s;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    padding:22px 0;
+    transition:padding 0.35s var(--ease), background 0.35s var(--ease), box-shadow .35s var(--ease);
+  }
+  header .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  header.scrolled{
+    padding:12px 0;
+    background:rgba(30,26,23,0.86);
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.25);
+  }
+  .logo{
+    display:flex;flex-direction:column;line-height:1;
+    color:var(--paper);
+  }
+  .logo .lg-main{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:20px;
+    letter-spacing:0.02em;
+  }
+  .logo .lg-sub{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    color:var(--brass-soft);
+    letter-spacing:0.22em;
+    margin-top:4px;
+  }
+  nav.links{
+    display:flex;gap:34px;
+    font-size:14px;font-weight:500;
+    color:var(--cured-stone);
+  }
+  nav.links a{
+    position:relative;padding-bottom:4px;
+    opacity:0.85;
+  }
+  nav.links a::after{
+    content:'';position:absolute;left:0;bottom:0;
+    width:0;height:1px;background:var(--brass);
+    transition:width 0.3s var(--ease);
+  }
+  nav.links a:hover{opacity:1;}
+  nav.links a:hover::after{width:100%;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 22px;
+    font-size:14px;font-weight:600;
+    border-radius:3px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s var(--ease), border-color .3s var(--ease);
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-oxide{background:var(--oxide);color:var(--paper);}
+  .btn-oxide:hover{background:var(--oxide-deep);box-shadow:0 10px 24px rgba(168,67,43,0.35);}
+  .btn-outline{border-color:rgba(237,231,218,0.4);color:var(--paper);background:transparent;}
+  .btn-outline:hover{border-color:var(--brass);color:var(--brass-soft);}
+  .btn-ghost-dark{border-color:rgba(33,29,26,0.25);color:var(--ink);background:transparent;}
+  .btn-ghost-dark:hover{border-color:var(--oxide);color:var(--oxide);}
+  .nav-cta{display:none;}
+  @media (min-width:900px){.nav-cta{display:inline-flex;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(198,154,70,0.16), transparent 60%),
+      linear-gradient(180deg, var(--wet-cement), var(--charcoal) 70%);
+    color:var(--paper);
+    padding:172px 0 120px;
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:0.24em;
+    color:var(--brass-soft);
+    text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;
+    margin-bottom:26px;
+  }
+  .hero-eyebrow::before{
+    content:'';width:26px;height:1px;background:var(--brass);
+  }
+  h1.hero-title{
+    font-size:clamp(40px, 6.6vw, 84px);
+    font-weight:600;
+    line-height:0.98;
+    max-width:920px;
+  }
+  h1.hero-title em{
+    font-style:italic;font-weight:400;color:var(--brass-soft);
+  }
+  .hero-rule{
+    height:3px;width:0;
+    background:linear-gradient(90deg, var(--oxide), var(--brass));
+    margin:30px 0 30px;
+    animation:pourbar 1.4s var(--ease) 0.5s forwards;
+  }
+  @keyframes pourbar{to{width:150px;}}
+  .hero-sub{
+    font-size:18px;line-height:1.65;
+    max-width:560px;
+    color:var(--cured-stone);
+    opacity:0.88;
+    margin-bottom:42px;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:64px;}
+  .hero-badges{
+    display:flex;flex-wrap:wrap;gap:28px 40px;
+    padding-top:30px;
+    border-top:1px solid var(--line-on-dark);
+  }
+  .hero-badge{display:flex;align-items:center;gap:12px;}
+  .hero-badge svg{flex-shrink:0;color:var(--brass);}
+  .hero-badge .hb-title{font-size:14px;font-weight:600;color:var(--paper);}
+  .hero-badge .hb-sub{font-size:12px;color:var(--aggregate);font-family:'IBM Plex Mono',monospace;letter-spacing:0.03em;}
+
+  /* ---------- CREDENTIALS STRIP ---------- */
+  .creds{
+    background:var(--brass);
+    color:var(--wet-cement);
+    padding:16px 0;
+    overflow:hidden;
+  }
+  .creds-track{
+    display:flex;gap:56px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;font-weight:600;letter-spacing:0.05em;
+    white-space:nowrap;
+    animation:scroll-x 26s linear infinite;
+    width:max-content;
+  }
+  .creds-track span{display:flex;align-items:center;gap:10px;}
+  .creds-track span::before{content:'●';font-size:8px;opacity:0.6;}
+  @keyframes scroll-x{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ---------- SECTION generic ---------- */
+  .section{padding:120px 0;}
+  .section-dark{background:var(--wet-cement);color:var(--paper);}
+  .eyebrow-line{
+    display:flex;align-items:center;gap:12px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--oxide);
+    margin-bottom:18px;
+  }
+  .eyebrow-line::before{content:'';width:26px;height:1px;background:var(--oxide);}
+  .section-dark .eyebrow-line{color:var(--brass-soft);}
+  .section-dark .eyebrow-line::before{background:var(--brass);}
+  h2.section-title{
+    font-size:clamp(30px,4vw,46px);
+    font-weight:600;
+    max-width:640px;
+    margin-bottom:20px;
+  }
+  .section-lede{
+    font-size:17px;line-height:1.7;color:var(--aggregate-dim);
+    max-width:540px;
+  }
+  .section-dark .section-lede{color:var(--cured-stone);opacity:0.82;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;grid-template-columns:1fr;gap:64px;
+    align-items:center;
+    margin-top:60px;
+  }
+  @media (min-width:900px){.about-grid{grid-template-columns:0.9fr 1.1fr;}}
+  .about-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:4px;
+    overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg, rgba(139,131,120,0.25) 0 2px, transparent 2px 34px),
+      linear-gradient(160deg, #C9C2B4, #A79E8D);
+  }
+  .about-visual .plate{
+    position:absolute;bottom:28px;left:28px;right:28px;
+    background:rgba(30,26,23,0.82);
+    color:var(--paper);
+    padding:20px 22px;
+    border-left:3px solid var(--brass);
+  }
+  .about-visual .plate .yrs{font-family:'Fraunces',serif;font-size:38px;font-weight:600;color:var(--brass-soft);line-height:1;}
+  .about-visual .plate .yrs-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;margin-top:6px;color:var(--cured-stone);opacity:0.8;}
+  .about-copy p{font-size:16.5px;line-height:1.8;color:var(--aggregate-dim);margin:0 0 20px;}
+  .about-list{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:16px;}
+  .about-list li{
+    display:flex;align-items:flex-start;gap:14px;
+    font-size:15px;color:var(--ink);
+  }
+  .about-list svg{flex-shrink:0;margin-top:2px;color:var(--oxide);}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1px;background:var(--line-on-light);
+    margin-top:56px;border:1px solid var(--line-on-light);
+  }
+  .service-card{
+    background:var(--paper);
+    padding:36px 30px;
+    transition:background 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .service-card:hover{background:var(--stone-soft);transform:translateY(-4px);}
+  .service-card .sc-icon{
+    width:44px;height:44px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(168,67,43,0.09);
+    color:var(--oxide);
+    border-radius:3px;
+    margin-bottom:22px;
+    transition:background 0.35s, color 0.35s;
+  }
+  .service-card:hover .sc-icon{background:var(--oxide);color:var(--paper);}
+  .service-card h3{font-size:18px;font-weight:600;margin-bottom:10px;}
+  .service-card p{font-size:14.5px;line-height:1.6;color:var(--aggregate-dim);margin:0;}
+
+  /* ---------- PROCESS ---------- */
+  .process-list{margin-top:64px;}
+  .process-item{
+    display:grid;grid-template-columns:80px 1fr;
+    gap:28px;
+    padding:34px 0;
+    border-top:1px solid var(--line-on-dark);
+  }
+  .process-item:last-child{border-bottom:1px solid var(--line-on-dark);}
+  .process-num{
+    font-family:'Fraunces',serif;font-weight:500;font-style:italic;
+    font-size:40px;color:var(--brass-soft);opacity:0.75;line-height:1;
+  }
+  .process-body h3{font-size:20px;font-weight:600;margin-bottom:10px;color:var(--paper);}
+  .process-body p{font-size:15px;line-height:1.7;color:var(--cured-stone);opacity:0.78;max-width:560px;margin:0;}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:24px;margin-top:56px;
+  }
+  .gallery-item{
+    position:relative;
+    aspect-ratio:5/4;
+    border-radius:4px;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .gallery-item .gi-bg{
+    position:absolute;inset:0;
+    transition:transform 0.6s var(--ease);
+  }
+  .gallery-item:hover .gi-bg{transform:scale(1.06);}
+  .gallery-item .gi-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(30,26,23,0.88));
+    display:flex;align-items:flex-end;padding:20px;
+    opacity:0;transition:opacity 0.4s var(--ease);
+  }
+  .gallery-item:hover .gi-overlay{opacity:1;}
+  .gi-overlay .gi-text .gi-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--brass-soft);text-transform:uppercase;}
+  .gi-overlay .gi-text h4{color:var(--paper);font-size:17px;font-weight:600;margin:6px 0 0;}
+
+  /* ---------- STATS ---------- */
+  .stats-band{
+    background:var(--oxide);
+    color:var(--paper);
+    padding:70px 0;
+  }
+  .stats-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:36px;text-align:left;
+  }
+  .stat-num{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(34px,4vw,48px);line-height:1;}
+  .stat-label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.85;margin-top:10px;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:28px;margin-top:56px;
+  }
+  .testi-card{
+    background:var(--stone-soft);
+    border:1px solid var(--line-on-light);
+    padding:34px 30px;
+    border-radius:4px;
+  }
+  .testi-stars{color:var(--brass);font-size:15px;letter-spacing:2px;margin-bottom:18px;}
+  .testi-card p{font-size:16px;line-height:1.7;color:var(--ink);margin:0 0 22px;font-style:italic;font-family:'Fraunces',serif;}
+  .testi-name{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--aggregate-dim);letter-spacing:0.03em;}
+
+  /* ---------- CONTACT / CTA ---------- */
+  .contact-grid{
+    display:grid;grid-template-columns:1fr;gap:52px;
+    margin-top:56px;
+  }
+  @media (min-width:900px){.contact-grid{grid-template-columns:1.1fr 0.9fr;}}
+  .contact-methods{display:grid;gap:20px;}
+  .contact-card{
+    display:flex;align-items:center;gap:18px;
+    padding:24px 26px;
+    background:var(--charcoal-soft);
+    border:1px solid var(--line-on-dark);
+    border-radius:4px;
+    transition:border-color 0.3s, transform 0.3s var(--ease);
+  }
+  .contact-card:hover{border-color:var(--brass);transform:translateX(4px);}
+  .contact-card svg{color:var(--brass);flex-shrink:0;}
+  .contact-card .cc-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--aggregate);}
+  .contact-card .cc-value{font-size:17px;font-weight:600;color:var(--paper);margin-top:4px;}
+  .contact-panel{
+    background:var(--charcoal-soft);
+    border:1px solid var(--line-on-dark);
+    border-radius:4px;
+    padding:40px 34px;
+  }
+  .contact-panel h3{color:var(--paper);font-size:24px;margin-bottom:14px;}
+  .contact-panel p{color:var(--cured-stone);opacity:0.78;font-size:15px;line-height:1.7;margin:0 0 26px;}
+  .service-area{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;
+  }
+  .service-area span{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    padding:6px 12px;border:1px solid var(--line-on-dark);
+    border-radius:20px;color:var(--cured-stone);opacity:0.85;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--wet-cement);
+    color:var(--aggregate);
+    padding:38px 0;
+    border-top:1px solid var(--line-on-dark);
+  }
+  .foot-row{
+    display:flex;flex-wrap:wrap;gap:16px;
+    align-items:center;justify-content:space-between;
+    font-size:13px;
+  }
+  .foot-row .mono{color:var(--aggregate);}
+
+  /* ---------- mobile sticky call bar ---------- */
+  .mobile-call{
+    position:fixed;left:0;right:0;bottom:0;z-index:200;
+    display:flex;
+    background:var(--oxide);
+    box-shadow:0 -8px 26px rgba(0,0,0,0.25);
+  }
+  .mobile-call a{
+    flex:1;text-align:center;padding:16px 10px;
+    color:var(--paper);font-weight:600;font-size:14.5px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .mobile-call a:first-child{border-right:1px solid rgba(255,255,255,0.25);background:var(--oxide-deep);}
+  @media (min-width:701px){.mobile-call{display:none;}}
+  @media (max-width:700px){body{padding-bottom:60px;}}
+
+  @media (max-width:899px){
+    nav.links{display:none;}
+    .hero{padding-top:132px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <div class="logo">
+      <span class="lg-main">LONGHORN CONCRETE</span>
+      <span class="lg-sub">FAMILY&nbsp;OWNED&nbsp;·&nbsp;SINCE&nbsp;DAY&nbsp;ONE</span>
+    </div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="tel:8183566279" class="btn btn-oxide nav-cta">Call (818) 356-6279</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="grain"></div>
+  <div class="wrap">
+    <div class="hero-eyebrow">Family-Owned · 40+ Years of Concrete Craft</div>
+    <h1 class="hero-title">Poured with pride,<br><em>built</em> to outlast.</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Longhorn Concrete Inc. has spent more than four decades pouring driveways, patios, and foundations for families across the San Fernando Valley — the same care, the same crew, job after job.</p>
+    <div class="hero-actions">
+      <a href="tel:8183566279" class="btn btn-oxide">Call (818) 356-6279</a>
+      <a href="https://www.instagram.com/longhorn_concrete_inc/" target="_blank" rel="noopener" class="btn btn-outline">DM Us for a Free Quote</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <div><div class="hb-title">Licensed · Bonded · Insured</div><div class="hb-sub">LIC. #1147712</div></div>
+      </div>
+      <div class="hero-badge">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>
+        <div><div class="hb-title">Family-Owned & Operated</div><div class="hb-sub">Three generations strong</div></div>
+      </div>
+      <div class="hero-badge">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <div><div class="hb-title">40+ Years Experience</div><div class="hb-sub">San Fernando Valley</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS TICKER ============ -->
+<div class="creds">
+  <div class="creds-track">
+    <span>LICENSED · BONDED · INSURED</span>
+    <span>LIC. #1147712</span>
+    <span>FAMILY-OWNED SINCE DAY ONE</span>
+    <span>40+ YEARS OF EXPERIENCE</span>
+    <span>SAN FERNANDO VALLEY</span>
+    <span>LICENSED · BONDED · INSURED</span>
+    <span>LIC. #1147712</span>
+    <span>FAMILY-OWNED SINCE DAY ONE</span>
+    <span>40+ YEARS OF EXPERIENCE</span>
+    <span>SAN FERNANDO VALLEY</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow-line">Our Story</div>
+      <h2 class="section-title">A family business, poured one slab at a time.</h2>
+      <p class="section-lede">Longhorn Concrete Inc. was built the way we build everything else — with patience, the right mix, and a crew that treats every driveway like it's going in front of their own house.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-visual" data-reveal>
+        <div class="plate">
+          <div class="yrs">40+</div>
+          <div class="yrs-label">Years in Business</div>
+        </div>
+      </div>
+      <div class="about-copy" data-reveal data-reveal-delay="2">
+        <p>For more than four decades, Longhorn Concrete has been the name Valley families call when it's time to repour a cracked driveway, finish a backyard patio, or set a foundation that will hold for the next fifty years.</p>
+        <p>We're still a small, family-run crew — which means the person who quotes your job is often the same person who shows up to pour it. No subcontractors passing the blame, no corporate call center. Just concrete done right.</p>
+        <ul class="about-list">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Licensed, bonded &amp; fully insured (Lic. #1147712)</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Family-owned crew, no subcontracted labor</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free on-site estimates across the Valley</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section" style="background:var(--stone-soft);" id="services">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow-line">What We Pour</div>
+      <h2 class="section-title">Concrete work for every corner of the property.</h2>
+      <p class="section-lede">From a cracked front walkway to a full backyard renovation, we handle residential and commercial concrete of every size.</p>
+    </div>
+    <div class="services-grid" data-reveal data-reveal-delay="1">
+      <div class="service-card">
+        <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10l9-7 9 7v10a1 1 0 01-1 1H4a1 1 0 01-1-1z"/></svg></div>
+        <h3>Driveways</h3>
+        <p>New pours, replacements, and resurfacing built to handle daily wear for decades.</p>
+      </div>
+      <div class="service-card">
+        <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <h3>Patios &amp; Stamped Concrete</h3>
+        <p>Decorative finishes, stamped patterns, and custom colors for backyard living spaces.</p>
+      </div>
+      <div class="service-card">
+        <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h16M4 20V10l8-6 8 6v10"/></svg></div>
+        <h3>Foundations &amp; Slabs</h3>
+        <p>Structural pours engineered and finished for additions, ADUs, and new construction.</p>
+      </div>
+      <div class="service-card">
+        <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M6 21V9m6 12V5m6 16v-9"/></svg></div>
+        <h3>Retaining Walls</h3>
+        <p>Hillside and yard retaining walls built to hold soil and grade on tricky Valley lots.</p>
+      </div>
+      <div class="service-card">
+        <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12h20M2 6h20M2 18h20"/></svg></div>
+        <h3>Walkways &amp; Curbs</h3>
+        <p>Clean, level walkways, sidewalks, and curbing for safer, tidier property lines.</p>
+      </div>
+      <div class="service-card">
+        <div class="sc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20l-1.5-8L4 10l6.5-2L12 2l1.5 6L20 10l-6.5 2z"/></svg></div>
+        <h3>Repair &amp; Resurfacing</h3>
+        <p>Crack repair, mudjacking-style leveling, and full resurfacing for tired concrete.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section section-dark" id="process">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow-line">How We Work</div>
+      <h2 class="section-title">Five steps between your call and cured concrete.</h2>
+      <p class="section-lede">Every job — big or small — follows the same sequence, so you always know what's next.</p>
+    </div>
+    <div class="process-list">
+      <div class="process-item" data-reveal>
+        <div class="process-num mono">01</div>
+        <div class="process-body">
+          <h3>Free Consultation</h3>
+          <p>Call or DM us with your project. We'll walk the site, talk through options, and give you a straight quote — no pressure.</p>
+        </div>
+      </div>
+      <div class="process-item" data-reveal data-reveal-delay="1">
+        <div class="process-num mono">02</div>
+        <div class="process-body">
+          <h3>Site Prep &amp; Forming</h3>
+          <p>We excavate, grade, and set forms to the exact lines and slope your project needs.</p>
+        </div>
+      </div>
+      <div class="process-item" data-reveal data-reveal-delay="2">
+        <div class="process-num mono">03</div>
+        <div class="process-body">
+          <h3>Pour Day</h3>
+          <p>Concrete is mixed, poured, and screeded level by the same crew that quoted the job.</p>
+        </div>
+      </div>
+      <div class="process-item" data-reveal data-reveal-delay="3">
+        <div class="process-num mono">04</div>
+        <div class="process-body">
+          <h3>Finish &amp; Cure</h3>
+          <p>Broom, stamped, or smooth-troweled finish, then a proper cure time before it sees traffic.</p>
+        </div>
+      </div>
+      <div class="process-item" data-reveal data-reveal-delay="4">
+        <div class="process-num mono">05</div>
+        <div class="process-body">
+          <h3>Final Walkthrough</h3>
+          <p>We walk the finished job with you and don't consider it done until you do.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow-line">Recent Work</div>
+      <h2 class="section-title">A few slabs we're proud of.</h2>
+      <p class="section-lede">A sample of the driveways, patios, and foundations we've poured around the Valley.</p>
+    </div>
+    <div class="gallery-grid" data-reveal data-reveal-delay="1">
+      <div class="gallery-item">
+        <div class="gi-bg" style="background:linear-gradient(135deg,#B7AF9E,#8B8378);"></div>
+        <div class="gi-overlay"><div class="gi-text"><div class="gi-tag">Driveway Repour</div><h4>Burbank, CA</h4></div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gi-bg" style="background:linear-gradient(135deg,#C9A56B,#A8432B);"></div>
+        <div class="gi-overlay"><div class="gi-text"><div class="gi-tag">Stamped Patio</div><h4>Van Nuys, CA</h4></div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gi-bg" style="background:linear-gradient(135deg,#8B8378,#37312B);"></div>
+        <div class="gi-overlay"><div class="gi-text"><div class="gi-tag">Foundation Pour</div><h4>North Hollywood, CA</h4></div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gi-bg" style="background:linear-gradient(135deg,#C69A46,#832F1D);"></div>
+        <div class="gi-overlay"><div class="gi-text"><div class="gi-tag">Retaining Wall</div><h4>Sherman Oaks, CA</h4></div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gi-bg" style="background:linear-gradient(135deg,#E4C989,#8B8378);"></div>
+        <div class="gi-overlay"><div class="gi-text"><div class="gi-tag">Walkway &amp; Curb</div><h4>Encino, CA</h4></div></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gi-bg" style="background:linear-gradient(135deg,#A79E8D,#2A2521);"></div>
+        <div class="gi-overlay"><div class="gi-text"><div class="gi-tag">Resurfacing</div><h4>Glendale, CA</h4></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats-band">
+  <div class="wrap">
+    <div class="stats-grid" data-reveal>
+      <div><div class="stat-num">40+</div><div class="stat-label">Years in Business</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Licensed &amp; Insured</div></div>
+      <div><div class="stat-num">3rd</div><div class="stat-label">Generation Family-Run</div></div>
+      <div><div class="stat-num">#1147712</div><div class="stat-label">CA Contractor License</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section" style="background:var(--stone-soft);">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow-line">Client Reviews</div>
+      <h2 class="section-title">What Valley homeowners say.</h2>
+      <p class="section-lede">Sample review layout — swap in your real Google or Instagram reviews here.</p>
+    </div>
+    <div class="testi-grid" data-reveal data-reveal-delay="1">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"They repoured our whole driveway in a weekend and it still looks brand new years later. Straightforward quote, no surprises."</p>
+        <div class="testi-name">— M. Reyes, Burbank</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Family business through and through. The owner was on-site every day of our patio pour. You can tell they care about the finished product."</p>
+        <div class="testi-name">— D. Whitfield, Encino</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Called three companies for quotes on our foundation repair. Longhorn was the only one who actually explained what was wrong first."</p>
+        <div class="testi-name">— J. Park, Van Nuys</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / CTA ============ -->
+<section class="section section-dark" id="contact">
+  <div class="wrap">
+    <div data-reveal>
+      <div class="eyebrow-line">Get In Touch</div>
+      <h2 class="section-title">Ready to pour something that lasts?</h2>
+      <p class="section-lede">Call, text, or send a DM — we'll set up a free on-site estimate.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-methods" data-reveal data-reveal-delay="1">
+        <a href="tel:8183566279" class="contact-card">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <div><div class="cc-label">Call or Text</div><div class="cc-value">(818) 356-6279</div></div>
+        </a>
+        <a href="https://www.instagram.com/longhorn_concrete_inc/" target="_blank" rel="noopener" class="contact-card">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          <div><div class="cc-label">Instagram DM</div><div class="cc-value">@longhorn_concrete_inc</div></div>
+        </a>
+        <div class="contact-card" style="cursor:default;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <div><div class="cc-label">Contractor License</div><div class="cc-value">#1147712 · Bonded &amp; Insured</div></div>
+        </div>
+      </div>
+      <div class="contact-panel" data-reveal data-reveal-delay="2">
+        <h3>Free, no-pressure estimates.</h3>
+        <p>Every quote comes from the crew that will actually pour your job — not a call center. Reach out and we'll get back to you within one business day.</p>
+        <a href="tel:8183566279" class="btn btn-oxide" style="width:100%;justify-content:center;">Call Now — (818) 356-6279</a>
+        <div class="service-area">
+          <span>Burbank</span><span>Van Nuys</span><span>North Hollywood</span><span>Sherman Oaks</span><span>Encino</span><span>Glendale</span><span>+ San Fernando Valley</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="mono">© <span id="yr"></span> Longhorn Concrete Inc. All rights reserved.</span>
+    <span class="mono">Lic. #1147712 · Licensed, Bonded &amp; Insured · San Fernando Valley, CA</span>
+  </div>
+</footer>
+
+<div class="mobile-call">
+  <a href="tel:8183566279"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call Now</a>
+  <a href="https://www.instagram.com/longhorn_concrete_inc/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/></svg>DM Us</a>
+</div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // header shrink on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive:true });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
